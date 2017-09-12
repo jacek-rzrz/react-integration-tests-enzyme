@@ -1,8 +1,21 @@
-import React from 'react';
-import { App } from './App';
-import { mount } from 'enzyme';
+import {AppTestHelper} from "./test_support";
 
-it('renders without crashing', () => {
-  const app = mount(<App />);
-  expect(app).toBePresent();
+let app;
+
+beforeEach(() => {
+    app = new AppTestHelper();
+});
+
+it('users can add items to the shopping list', () => {
+    expect(app.getItems()).toEqual([]);
+
+    app.clickAddNewItemButton();
+    app.fillInItemName('apples');
+    app.clickSaveNewItemButton();
+    expect(app.getItems()).toEqual(['apples']);
+
+    app.clickAddNewItemButton();
+    app.fillInItemName('bananas');
+    app.clickSaveNewItemButton();
+    expect(app.getItems()).toEqual(['apples', 'bananas']);
 });

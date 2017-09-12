@@ -1,19 +1,36 @@
-import React, { Component } from 'react';
-import logo from './styles/logo.svg';
+import React, {Component} from 'react';
+import {BrowserRouter, Link, Route} from 'react-router-dom';
 import './styles/App.css';
+import {ShoppingListItemForm} from "./shopping_list/ShoppingListItemForm";
+import {ShoppingList, shoppingListReducer, shoppingListMiddleware} from "./shopping_list";
+import {Provider} from "react-redux";
+import {combineReducers, createStore, compose, applyMiddleware} from "redux";
+import {reducer as formReducer} from 'redux-form';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
+const store = createStore(combineReducers({
+        shoppingList: shoppingListReducer,
+        form: formReducer
+    }),
+    composeEnhancers(applyMiddleware(shoppingListMiddleware))
+);
 
 export class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <Provider store={store}>
+                <BrowserRouter>
+                    <div className="app">
+                        <h1>Shopping list</h1>
+                        <ShoppingList/>
+                        <Route path="/new-item" component={ShoppingListItemForm}/>
+                        <Route exact path="/" render={() =>
+                            <Link to="/new-item" data-qa="add-new-item">New item</Link>
+                        }/>
+                    </div>
+                </BrowserRouter>
+            </Provider>
+        );
+    }
 }
