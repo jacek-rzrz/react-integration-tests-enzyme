@@ -1,1 +1,1 @@
-export const actionsReducer = (state=[], action) => [ ...state, action ];
+export const actionsReducer = (state = [], action) => [...state, action];

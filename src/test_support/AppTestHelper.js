@@ -1,12 +1,12 @@
 import React from 'react';
-import { mount } from 'enzyme';
-import { App } from '../App';
-import { click, setValue, submit } from '.';
+import {mount} from 'enzyme';
+import {App} from '../App';
+import {click, setValue, submit} from '.';
 
 export class AppTestHelper {
 
     constructor() {
-        this.screen = mount(<App />);
+        this.screen = mount(<App/>);
     }
 
     byDataQa(dataQa) {
