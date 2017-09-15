@@ -4,7 +4,7 @@ import {createItem} from "./actions";
 
 const renderShoppingListItemForm = ({handleSubmit}) => (
     <form onSubmit={handleSubmit}>
-        <Field component="input" type="text" name="name" data-qa="new-item-name"/>
+        <Field component="input" type="text" name="name" data-qa="new-item-name" autoFocus={true}/>
         <button type="submit" data-qa="save-new-item">Save</button>
     </form>
 );
