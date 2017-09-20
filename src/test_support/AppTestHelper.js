@@ -6,7 +6,8 @@ import {click, setValue, submit} from '.';
 export class AppTestHelper {
 
     constructor() {
-        this.screen = mount(<App/>);
+        this.dom = document.createElement("div");
+        this.screen = mount(<App/>, { attachTo: this.dom });
     }
 
     byDataQa(dataQa) {
@@ -30,6 +31,10 @@ export class AppTestHelper {
 
     getItems() {
         return this.byDataQa('item-name').map(node => node.text());
+    }
+
+    getDate() {
+        return this.dom.querySelector('[data-qa="today"]').innerHTML;
     }
 
 }

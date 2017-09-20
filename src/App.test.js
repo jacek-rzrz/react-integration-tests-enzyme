@@ -1,8 +1,10 @@
 import {AppTestHelper, asyncFlush, mockApi} from "./test_support";
+import mockDate from 'mockdate';
 
 let app;
 
 beforeEach(async () => {
+    mockDate.set(new Date(2017, 11, 31));
     mockApi.mockGetItemsOnce([{id: 11, name: 'apples'}, {id: 12, name: 'bananas'}]);
     app = new AppTestHelper();
     await asyncFlush();
@@ -22,4 +24,8 @@ it('users can add items to the shopping list', async () => {
     await asyncFlush();
 
     expect(app.getItems()).toEqual(['apples', 'bananas', 'carrots']);
+});
+
+it('renders current date', () => {
+    expect(app.getDate()).toBe('31/12/2017');
 });

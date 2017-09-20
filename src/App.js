@@ -8,6 +8,7 @@ import {Provider} from "react-redux";
 import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import {reducer as formReducer} from 'redux-form';
 import createHistory from 'history/createBrowserHistory';
+import {Calendar} from './calendar';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -34,6 +35,7 @@ export class App extends Component {
                         <Route exact path="/" render={() =>
                             <Link to="/new-item" data-qa="add-new-item">New item</Link>
                         }/>
+                        <Calendar />
                     </div>
                 </ConnectedRouter>
             </Provider>
