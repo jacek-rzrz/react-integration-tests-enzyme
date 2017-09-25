@@ -9,22 +9,15 @@ export const shoppingListMiddleware = store => next => action => {
     next(action);
 
     if (action.type === locationChange.type && action.payload.pathname === '/') {
-        const handleSuccess = items => {
-            store.dispatch(replaceItems(items));
-        };
         fetch(API_URI)
             .then(response => response.json())
-            .then(handleSuccess);
+            .then(items => store.dispatch(replaceItems(items)));
     }
 
     if (action.type === createItem.type) {
-        const handleSuccess = item => {
-            store.dispatch(appendItem(item));
-            store.dispatch(push('/'));
-        };
-
+        store.dispatch(appendItem({ name: action.payload.name, id: action.payload.name }));
         fetch(API_URI, {method: 'POST', body: JSON.stringify(action.payload)})
             .then(response => response.json())
-            .then(handleSuccess);
+            .then(() => store.dispatch(push('/')));
     }
 };

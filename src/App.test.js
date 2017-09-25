@@ -15,15 +15,17 @@ it('populates shopping list with items fetched from the server', () => {
 });
 
 it('users can add items to the shopping list', async () => {
-    mockApi.mockPostItem({name: 'carrots', id: 13});
+    mockApi.mockPostItem({name: 'dill', id: 14});
     app.clickAddNewItemButton();
-    app.fillInItemName('carrots');
+    app.fillInItemName('dill');
     app.clickSaveNewItemButton();
 
-    mockApi.mockGetItems([{id: 11, name: 'apples'}, {id: 12, name: 'bananas'}, {id: 13, name: 'carrots'}]);
+    expect(app.getItems()).toEqual(['apples', 'bananas', 'dill']);
+
+    mockApi.mockGetItems([{id: 11, name: 'apples'}, {id: 12, name: 'bananas'}, {id:13, name: 'carrots'}, {id: 14, name: 'dill'}]);
     await asyncFlush();
 
-    expect(app.getItems()).toEqual(['apples', 'bananas', 'carrots']);
+    expect(app.getItems()).toEqual(['apples', 'bananas', 'carrots', 'dill']);
 });
 
 it('renders current date', () => {
