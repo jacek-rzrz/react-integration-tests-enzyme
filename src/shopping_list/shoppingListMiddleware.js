@@ -15,7 +15,7 @@ export const shoppingListMiddleware = store => next => action => {
     }
 
     if (action.type === createItem.type) {
-        store.dispatch(appendItem({ name: action.payload.name, id: action.payload.name }));
+        store.dispatch(appendItem({name: action.payload.name, id: action.payload.name}));
         fetch(API_URI, {method: 'POST', body: JSON.stringify(action.payload)})
             .then(response => response.json())
             .then(() => store.dispatch(push('/')));

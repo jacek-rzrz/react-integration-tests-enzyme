@@ -22,7 +22,10 @@ it('users can add items to the shopping list', async () => {
 
     expect(app.getItems()).toEqual(['apples', 'bananas', 'dill']);
 
-    mockApi.mockGetItems([{id: 11, name: 'apples'}, {id: 12, name: 'bananas'}, {id:13, name: 'carrots'}, {id: 14, name: 'dill'}]);
+    mockApi.mockGetItems([{id: 11, name: 'apples'}, {id: 12, name: 'bananas'}, {id: 13, name: 'carrots'}, {
+        id: 14,
+        name: 'dill'
+    }]);
     await asyncFlush();
 
     expect(app.getItems()).toEqual(['apples', 'bananas', 'carrots', 'dill']);

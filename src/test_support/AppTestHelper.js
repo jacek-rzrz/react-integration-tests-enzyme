@@ -7,7 +7,7 @@ export class AppTestHelper {
 
     constructor() {
         this.dom = document.createElement("div");
-        this.screen = mount(<App/>, { attachTo: this.dom });
+        this.screen = mount(<App/>, {attachTo: this.dom});
     }
 
     byDataQa(dataQa) {

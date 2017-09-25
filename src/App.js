@@ -35,7 +35,7 @@ export class App extends Component {
                         <Route exact path="/" render={() =>
                             <Link to="/new-item" data-qa="add-new-item">New item</Link>
                         }/>
-                        <Calendar />
+                        <Calendar/>
                     </div>
                 </ConnectedRouter>
             </Provider>
